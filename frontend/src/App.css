@@ -1,0 +1,12 @@
+select::-ms-expand {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+select:focus::-ms-expand {
+  background-color: transparent;
+}
+
+select {
+  appearance: none;
+}
