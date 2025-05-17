@@ -180,6 +180,33 @@ def profile():
         return jsonify({"user_info": user_info}), 200
     return jsonify({"error": "Invalid or expired token"}), 401
 
+@app.route('/delete-account', methods=['DELETE'])
+def delete_account():
+    token = request.headers.get('Authorization')
+    if not token:
+        return jsonify({"error": "Token missing"}), 400
+    
+    token = token.split(" ")[1]
+    decoded = decode_token(token)
+    if decoded:
+        user_id = decoded['user_id']
+        
+        try:
+            connection = get_db()
+            if connection:
+                cursor = connection.cursor()
+                query = "DELETE FROM users WHERE user_id = %s"
+                cursor.execute(query, (user_id,))
+                connection.commit()
+                cursor.close()
+                connection.close()
+                return jsonify({"message": "Account deleted successfully!"}), 200
+            else:
+                return jsonify({"error": "Failed to connect to the database"}), 500
+        except Error as e:
+            return jsonify({"error": f"Database error: {e}"}), 500
+    return jsonify({"error": "Invalid or expired token"}), 401
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -56,6 +56,40 @@ const Home = () => {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    const confirmation = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+    if (!confirmation) {
+      return;
+    }
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://127.0.1:5000/delete-account", {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("Account deleted successfully.");
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        setUsername("");
+        setEthnicity("");
+        navigate("/"); 
+      } else {
+        alert("Error deleting account: " + data.message);
+      }
+    }
+    catch (error) {
+      console.error("Error deleting account:", error);
+      alert("An error occurred while deleting the account.");
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-black flex flex-col items-center justify-center transition-colors duration-300">
       <header className="text-center mb-8">
@@ -102,6 +136,10 @@ const Home = () => {
             >
             Diabetes Predictor
             </Link>
+            <button onClick={handleDeleteAccount}
+            className="px-6 py-3 bg-yellow-500 text-white font-medium rounded-lg shadow-md hover:bg-yellow-600 transition duration-300">
+              Delete Account
+            </button>
           </>
         )}
       </nav>
