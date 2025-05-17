@@ -20,7 +20,7 @@ preprocessor = ColumnTransformer(
 
 pipeline = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('classifier', LogisticRegression(max_iter=1000))
+    ('classifier', LogisticRegression(penalty='l2', C=0.1, solver='lbfgs', max_iter=1000, random_state=42, class_weight='balanced'))
 ])
 
 pipeline.fit(X, y)
