@@ -4,8 +4,10 @@ import Home from "./pages/home";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import Predictor from "./pages/predictor";
+import Resources from "./pages/Resources";
 import './App.css';
 import Header from './components/header';
+import Footer from './components/Footer';
 
 
 
@@ -33,7 +35,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/predictor" element={<Predictor />} />
+        <Route path="/resources" element={<Resources />} />
       </Routes>
+      <Footer/>
     </div>
   </Router>
   );

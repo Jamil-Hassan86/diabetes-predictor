@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Footer from "../components/Footer";
+import EthnicityAdvice from "../components/EthnicityAdvice";
 
 const Predictor = () => {
   const location = useLocation();
@@ -69,23 +71,25 @@ const Predictor = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-black flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-      <h1 className="text-3xl sm:text-4xl font-bold text-blue-600 mb-6 text-center">
-        Diabetes Risk Predictor
-      </h1>
+      <section className="text-center mb-10">
+        <h1 className="text-3xl sm:text-4xl font-bold text-blue-600 mb-6 text-center">
+          Diabetes Risk Predictor
+        </h1>
+      </section>
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl"
+        className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl"
       >
         
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2" htmlFor="age">
+          <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2" htmlFor="age">
             Age
           </label>
           <input
             type="number"
             id="age"
             name="age"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
             placeholder="Enter your age"
             value={formData.age}
             onChange={handleChange}
@@ -93,13 +97,13 @@ const Predictor = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2" htmlFor="gender">
+          <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2" htmlFor="gender">
             Gender
           </label>
           <select
             id="gender"
             name="gender"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
             value={formData.gender}
             onChange={handleChange}
           >
@@ -110,14 +114,14 @@ const Predictor = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2" htmlFor="height">
+          <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2" htmlFor="height">
             Height (cm)
           </label>
           <input
             type="number"
             id="height"
             name="height"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
             placeholder="Enter your height in cm"
             value={formData.height}
             onChange={handleChange}
@@ -125,14 +129,14 @@ const Predictor = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2" htmlFor="weight">
+          <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2" htmlFor="weight">
             Weight (kg)
           </label>
           <input
             type="number"
             id="weight"
             name="weight"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
             placeholder="Enter your weight in kg"
             value={formData.weight}
             onChange={handleChange}
@@ -141,7 +145,7 @@ const Predictor = () => {
 
         
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2" htmlFor="ethnicity">
+          <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2" htmlFor="ethnicity">
             Ethnicity
           </label>
           <input
@@ -168,6 +172,8 @@ const Predictor = () => {
           <p>Prediction: {predictionResult}</p>
         </div>
       )}
+      {predictionResult && <EthnicityAdvice ethnicity={ethnicity} />}
+      <Footer />
     </div>
   );
 };
